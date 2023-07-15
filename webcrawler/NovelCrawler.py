@@ -81,7 +81,7 @@ class NovelCrawler:
             return None
 
         # 保留两位小数
-        return round(index / self.max_chapter_index, 2)
+        return round(index / self.max_chapter_index, 2) * 100
 
 
 if __name__ == '__main__':

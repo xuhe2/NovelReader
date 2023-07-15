@@ -103,51 +103,68 @@
 
 # no.3 entry 和 text 练习
 
-import tkinter as tk
+# import tkinter as tk
+#
+# root = tk.Tk()
+# root.title("小说阅读器")
+# root.geometry("800x500+100+100")
+#
+# entry = tk.Entry(root, font=("Arial", 20))  # 创建一个entry
+# # entry = tk.Entry(root, font=("Arial", 20),show="*")  # show="*" 代表输入的内容用*代替
+# entry.pack()
+#
+# text = tk.Text(root, font=("Arial", 20), height=5, bg='#FFFFCC', bd=1)  # 创建一个text, height=5,高度为5行
+# text.pack()
+#
+#
+# def insert_point():
+#     """
+#     在光标处插入内容
+#     :return:
+#     """
+#     var = entry.get()  # 获取entry的内容
+#     text.insert("insert", var)  # 在光标处插入内容
+#
+#
+# def insert_end():
+#     """
+#     在最后插入内容
+#     :return:
+#     """
+#     var = entry.get()  # 获取entry的内容
+#     text.insert("end", var)  # 在最后插入内容
+#
+#
+# def delete():
+#     """
+#     删除内容
+#     :return:
+#     """
+#     text.delete(1.0, "end")  # 删除从第一行第0列到最后一行最后一列的内容
+#
+#
+# # 创建一个按钮,点击按钮,在光标处插入内容
+# btn_insert_point = tk.Button(root, text="在光标处插入内容", font=("Arial", 20),
+#                              command=insert_point)  # command=insert_point,点击按钮,执行insert_point函数
+# btn_insert_point.pack()
+#
+# root.mainloop()
 
-root = tk.Tk()
-root.title("小说阅读器")
-root.geometry("800x500+100+100")
-
-entry = tk.Entry(root, font=("Arial", 20))  # 创建一个entry
-# entry = tk.Entry(root, font=("Arial", 20),show="*")  # show="*" 代表输入的内容用*代替
-entry.pack()
-
-text = tk.Text(root, font=("Arial", 20), height=5, bg='#FFFFCC', bd=1)  # 创建一个text, height=5,高度为5行
-text.pack()
-
-
-def insert_point():
+def move_cursor_up(passage):
     """
-    在光标处插入内容
+    光标上移动n行
+    :param n:
     :return:
     """
-    var = entry.get()  # 获取entry的内容
-    text.insert("insert", var)  # 在光标处插入内容
+    # 找到`\n`的个数
+    n = passage.count('\n')
+    # 光标上移动n行
+    print(f'\x1b[{n}A')
 
 
-def insert_end():
-    """
-    在最后插入内容
-    :return:
-    """
-    var = entry.get()  # 获取entry的内容
-    text.insert("end", var)  # 在最后插入内容
+passage = """
+    1. 你好
+    2. 你好
+"""
 
-
-def delete():
-    """
-    删除内容
-    :return:
-    """
-    text.delete(1.0, "end")  # 删除从第一行第0列到最后一行最后一列的内容
-
-
-# 创建一个按钮,点击按钮,在光标处插入内容
-btn_insert_point = tk.Button(root, text="在光标处插入内容", font=("Arial", 20),
-                             command=insert_point)  # command=insert_point,点击按钮,执行insert_point函数
-btn_insert_point.pack()
-
-root.mainloop()
-
-
+print("\x1b[10;1H")  # 光标移动到第10行,第20列
