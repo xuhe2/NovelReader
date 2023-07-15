@@ -60,10 +60,11 @@ class Shell:
         获取阅读进度
         :return:
         """
-        if self.book_index is None:
-            return 0
-        else:
-            return self.books[book_index].get_read_progress(self.last_read_index[book_index])  # 获取阅读进度
+        # 如果book_index超过了范围,则返回None
+        if book_index < 0 or book_index >= len(self.books):
+            return None
+
+        return self.books[book_index].get_read_progress(self.last_read_index[book_index])  # 获取阅读进度
 
     def _ls(self, command):
         # 返回值元素初始化
@@ -76,7 +77,7 @@ class Shell:
             for i in range(len(self.books)):
                 # 使用get_progress()方法获取进度
                 res.append(
-                    f'no.{i}\tname: {self.books[i].name}\tlast_read: {self.last_read_index[i]}\tprogress_rate: {self.get_progress(i)}')
+                    f'no.{i}\tname: {self.books[i].name}\tlast_read: 第{self.last_read_index[i]}章\tprogress_rate: {self.get_progress(i)}%')
             return res
 
         # 如果有参数,则显示对应的书籍
@@ -84,7 +85,7 @@ class Shell:
             for i in range(len(self.books)):  # 显示书籍列表
                 # 使用get_progress()方法获取进度
                 res.append(
-                    f'no.{i}\tname: {self.books[i].name}\tlast_read: {self.last_read_index[i]}\tprogress_rate: {self.get_progress(i)}')
+                    f'no.{i}\tname: {self.books[i].name}\tlast_read: 第{self.last_read_index[i]}章\tprogress_rate: {self.get_progress(i)}%')
             return res
 
         elif command[1] == '-chapter' or command[1] == '-c':
